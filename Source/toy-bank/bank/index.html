@@ -1,0 +1,37 @@
+<html>
+<head>
+<script>
+var web3 = parent.web3;
+var theContract = parent.contract;
+</script>
+</head>
+<body>
+	Ethereum balance: <span id="ether">?</span> Weis
+	<br><br>
+	Bank owner: <span id="owner">Uninitialized</span>
+	<br>
+	Savings Balance: <span id="savBal">Uninitialized</span>
+	<br>
+	Loan Balance: <span id="loanBal">Uninitialized</span>
+	<br><br>
+	<form>
+		Integer to store:
+		<input id="myform" type="text" name="name"><br>
+		<input id="submit" type="button" value="Submit" onclick="submitfun()">
+	</form>
+<script>
+	web3.eth.watch('pending').changed(function() {
+  	  var balance = web3.eth.balanceAt(web3.eth.coinbase);
+  	  document.getElementById("ether").innerText = web3.toDecimal(balance);
+  	});
+
+	function updateOwner() { document.getElementById("owner").innerHTML = theContract.queryOwner();}
+	function updateSBal() { document.getElementById("savBal").innerHTML = theContract.querySavingsBalance();}
+	function updateLBal() { document.getElementById("loanBal").innerHTML = theContract.queryLoanBalance();}
+	function submitfun(){ theContract.set(document.getElementById("myform").value);}
+	updateOwner();
+	updateSBal();
+	updateLBal();
+</script>
+</body>
+</html>

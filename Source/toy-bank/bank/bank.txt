@@ -1,0 +1,61 @@
+
+Bank
+
+
+
+
+BAsic idea
+* Users can
+  - Savings
+    > Deposit money (with some hope of interest)
+    > Withdraw money
+      * If money available, it comes immediately with no delay
+      * If money not available, withdrawal comes later, or not at all
+  - Loans
+    > Apply for loans (approved depending on credit score, funding availability)
+    > Pay loan off
+
+* Internal requirements
+  - Compound interest regularly
+    > regular updates required to calculate reserve amount.
+    > regular updates cost gas, and are not free
+  - Determine interest rates
+    > Initially this will be set by contract owner
+    > Could be set automatically, or by multi-sig agreement
+    > Loan and savings interest rates are obviously different
+  - Determine credit score
+    > Initial credit score can be based on on-blockchain reputation
+      or verified email address. 
+    > If a loan is paid back on time, add loan amount to credit score
+    > If a loan is not paid back in time, set credit score to zero.
+
+* Rate background
+  - Most Ethereum contracts will be non-profit; how does this impact
+    things? 
+  - bankrate.com says
+    > car loans about 3%, mortgages around 4%
+    > savings interest rates between 0 and 1%
+  - Spread
+    > so banks make between 2%- 4% on the loans they give out
+    > A typical load for a mutual fund is from 1-1.5%
+  - An Ethereum contract which offers 
+    > savings rate of 1.5, loans at 2%, would beat the commercial
+      banks on both ends
+* Reserve background
+  - US has average reserve of around 10%
+  - other countries range from 0 to 30% 
+
+* math
+  - Questions
+    > What is the best reserve ratio?  I guess as the size of the bank
+    increases, the reserve can be made higher.
+    > Assuming the savings and loan rates are close, what is the best
+    rate to use?  Lower rates encourage more loans, higher rates
+    encourage more savers.   One easy answer is to use negative
+    feedback targeting the reserve ratio.
+  - Assumptions
+    > Same rate for everyone
+    > Same 
+    > Fixed default rate
+  -
+  -
