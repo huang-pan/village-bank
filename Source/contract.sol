@@ -1,23 +1,61 @@
+// Block Chain University Spring 2015
+// Huang Pan
 contract bank {
-    // General parameters
-    address owner; // Bank owner
-    uint reserve; // Reserve = sum(savings)-sum(loans)
-    uint reserveRatio; // Reserve ratio
-    // Info about savers
-    uint saveRate; // 1+interest rate per block for savings in Q0.16
-    mapping (address => uint) saveBalances;
-    uint prevUpdateBlock; // Block number of last update block
-    // Info about borrowers
-    uint loanRate; // 1+interest rate per block for loans in Q0.16
-    mapping (address => uint) loanBalances;
-    mapping (address => uint) loanBlock; // Block when loan to be paid
-    mapping (address => uint) creditScore;
+
+	// Global State Variables
+	uint lastTimeStamp; // Time Stamp of last updated block
+
+	// General bank parameters
+	struct myBank {
+		address ownerAddr; // owner; need to implement multisig elders
+		uint reserve; // Reserve = sum(savings) - sum(loans) + capital injection
+		uint reservePct; // Reserve ratio, in %; percentage of bank capital to keep in reserve
+		uint annualSaveRateInPct; // Annual Savings Rate in %, compounded weekly
+		uint annualLoanRateInPct; // Annual Loan Rate in %, compounded weekly
+		uint maxLoanPct; // Max loan amount as a % of savings account amount
+	}
+
+	// Savings account
+	struct mySave {
+		address ownerAddr; // account owner
+		uint balance; // account balance
+	}
+
+	// Loan account
+	struct myLoan {
+		address ownerAddr; // account owner
+		uint balance; // account balance
+		uint maxLoanAmt; // current maximum loan amount
+	}
+	
+	// Mappings
+    mapping (address => myBank) villageBank;
+    mapping (address => mySave) saver1;
+    mapping (address => myLoan) loaner1;
 
     function bank() { // Constructor
-        owner = msg.sender;
-		reserve = msg.value;
-		saveRate = 9216; // (12.5/100+1)*8192
-		loanRate = 9216; // (12.5/100+1)*8192
+	
+		// Create Bank
+        villageBank[msg.sender].ownerAddr = msg.sender;
+		//villageBank[msg.sender].reserve = address(this).balance; 
+		villageBank[msg.sender].reserve = 1000000000000000; // large reserve
+		villageBank[msg.sender].reservePct = 50; 
+		villageBank[msg.sender].annualSaveRateInPct = 2; 
+		villageBank[msg.sender].annualLoanRateInPct = 6; 
+		villageBank[msg.sender].maxLoanPct = 300; 
+		
+		// Create Savers
+        saver1[msg.sender].ownerAddr = msg.sender;
+        saver1[msg.sender].balance = 0;
+
+		// Create Loaners
+        loaner1[msg.sender].ownerAddr = msg.sender;
+        loaner1[msg.sender].balance = 0;
+        loaner1[msg.sender].maxLoanAmt = 0;
+	
+		// Log initialization time stamp
+		lastTimeStamp = block.timestamp;
+	
     }
 	
     function calcInterest(uint rateP1, uint numBlocks) constant returns (uint rate) {
@@ -27,96 +65,83 @@ contract bank {
         }
         return rateT;
     }
+	
     // Savings Deposit
-//    function deposit() { // This is the right 'deposit' technique
-//        reserve +=msg.value;
-//        saveBalances[msg.sender] += msg.value; // balances initialized to 0
-//    }
-    function deposit(uint amount) { // kludgy deposit
-		reserve +=amount;
-        saveBalances[msg.sender] += amount; // balances initialized to 0
+    function deposit(uint amount) { 
+        saver1[msg.sender].balance += amount; 
     }
+	
     // Savings Withdrawal
     function withdraw(uint amount) {
-		if (reserve >= amount) {
-			if (saveBalances[msg.sender] >= amount) {
-				msg.sender.send(amount);
-                saveBalances[msg.sender] -= amount;
-				reserve -= amount;
-            } else { // trying to withdraw more money than balance
-				// (1) return err msg somehow?
-                // (2) use in credit score if multiple times?
-            }
-        } else { // not enough money in bank
-            // (1) return err msg somehow
-            // (2) queue people up for withdrawals
-        }
+		if (saver1[msg.sender].balance >= amount) {
+			msg.sender.send(amount);
+			saver1[msg.sender].balance -= amount;
+		} else { // trying to withdraw more money than balance
+			// (1) return err msg somehow?
+			// (2) use in credit score if multiple times?
+		}
     }
 
     // Get a loan
     function getLoan(uint amount, uint numBlocks) {
-//		if (prevUpdateBlock < block.number) { // maybe this is always true?
-//        }
-
 		uint finalAmount = (amount*calcInterest(loanRate, numBlocks))/8192;
-		if ((creditScore[msg.sender] >= finalAmount) ||	(saveBalances[msg.sender] >= finalAmount)) {
+		if (loaner1[msg.sender].balance >= finalAmount) {
 			msg.sender.send(amount);
-            loanBalances[msg.sender] += finalAmount;
-			reserve-=amount;
-        } // maybe send an error
+            loaner1[msg.sender].balance += finalAmount;
+        } 
     }
+	
     // Pay a loan off
     function payLoan() { // this function is close to the right
-        if (loanBalances[msg.sender] <= msg.value) {
+        if (loaner1[msg.sender].balance <= msg.value) {
             // some logic to actually take the money from the borrower,
             // and return any over-payment
-            if (loanBlock[msg.sender] == block.number) {
-                creditScore[msg.sender] += loanBalances[msg.sender];
-            }
-            loanBalances[msg.sender] = 0;
+            loaner1[msg.sender].balance = 0;
         } 
     }
+	
     function payLoanStupid(uint payOff) {
-        if (loanBalances[msg.sender] == payOff) {
-            if (loanBlock[msg.sender] == block.number) {
-                creditScore[msg.sender] += loanBalances[msg.sender];
-            }
-            loanBalances[msg.sender] = 0;
-			reserve+=payOff;
+        if (loaner1[msg.sender].balance == payOff) {
+            loaner1[msg.sender].balance = 0;
         } 
     }
-
-    // compound savings on a regular basis. This means 
-//    function compoundSavings() {
-//    }
 
     function queryLoanBalance() constant returns (uint balance) {
-        return loanBalances[msg.sender]; }
+        return loaner1[msg.sender].balance; 
+	}
     function querySavingsBalance() constant returns (uint balance) {
-        return saveBalances[msg.sender]; }
+        return saver1[msg.sender].balance; 
+	}
     function queryOwner() constant returns (address addr) {
-        return owner; }
+        return villageBank[msg.sender].ownerAddr; 
+	}
     function queryBankBal() constant returns (uint bal) {
-		return address(this).balance; }
+		return address(this).balance; 
+	}
     function queryLoanRate() constant returns (uint rate) {
-		return loanRate; }
-    function queryCreditScore() constant returns (uint rate) {
-		return creditScore[msg.sender]; }
+		return villageBank[msg.sender].annualLoanRateInPct; 
+	}
     function querySaveRate() constant returns (uint rate) {
-		return saveRate; }
+		return villageBank[msg.sender].annualSaveRateInPct; 
+	}
     function queryReserve() constant returns (uint resrv) {
-		return reserve; }
+		return villageBank[msg.sender].reserve; 
+	}
 	
     function setSaveRate(uint rate) {
-		if (msg.sender==owner) {
-			saveRate=rate;
-		}}
+		if (msg.sender==villageBank[msg.sender].ownerAddr) {
+			villageBank[msg.sender].annualSaveRateInPct=rate;
+		}
+	}
     function setLoanRate(uint rate) {
-		if (msg.sender==owner) {
-			loanRate=rate;
-		}}
+		if (msg.sender==villageBank[msg.sender].ownerAddr) {
+			villageBank[msg.sender].annualLoanRateInPct=rate;
+		}
+	}
+		
 	function checkLoanFinal(uint amount, uint numBlocks) constant returns (uint retval){
         uint finalAmount = amount*calcInterest(loanRate, numBlocks);
 		return finalAmount/8192;
 	}
-}
+	
+} // contract bank

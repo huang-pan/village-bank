@@ -1,4 +1,5 @@
 contract bank {
+	
     // General parameters
     address owner; // Bank owner
     uint reserve; // Reserve = sum(savings)-sum(loans)
@@ -28,10 +29,10 @@ contract bank {
         return rateT;
     }
     // Savings Deposit
-//    function deposit() { // This is the right 'deposit' technique
-//        reserve +=msg.value;
-//        saveBalances[msg.sender] += msg.value; // balances initialized to 0
-//    }
+	//    function deposit() { // This is the right 'deposit' technique
+	//        reserve +=msg.value;
+	//        saveBalances[msg.sender] += msg.value; // balances initialized to 0
+	//    }
     function deposit(uint amount) { // kludgy deposit
 		reserve +=amount;
         saveBalances[msg.sender] += amount; // balances initialized to 0
@@ -55,9 +56,8 @@ contract bank {
 
     // Get a loan
     function getLoan(uint amount, uint numBlocks) {
-//		if (prevUpdateBlock < block.number) { // maybe this is always true?
-//        }
-
+		//		if (prevUpdateBlock < block.number) { // maybe this is always true?
+		//        }
 		uint finalAmount = (amount*calcInterest(loanRate, numBlocks))/8192;
 		if ((creditScore[msg.sender] >= finalAmount) ||	(saveBalances[msg.sender] >= finalAmount)) {
 			msg.sender.send(amount);
@@ -87,9 +87,8 @@ contract bank {
     }
 
     // compound savings on a regular basis. This means 
-//    function compoundSavings() {
-//    }
-
+	//    function compoundSavings() {
+	//    }
     function queryLoanBalance() constant returns (uint balance) {
         return loanBalances[msg.sender]; }
     function querySavingsBalance() constant returns (uint balance) {
@@ -119,4 +118,5 @@ contract bank {
         uint finalAmount = amount*calcInterest(loanRate, numBlocks);
 		return finalAmount/8192;
 	}
-}
+	
+} // contract bank

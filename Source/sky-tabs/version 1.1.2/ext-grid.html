@@ -1,0 +1,154 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta charset="utf-8">		
+		<title>Sky Tabs</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		
+		<link rel="stylesheet" href="css/demo.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/sky-tabs.css">
+		
+		<!--[if lt IE 9]>
+			<link rel="stylesheet" href="css/sky-tabs-ie8.css">
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script src="js/sky-tabs-ie8.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body class="bg-cyan">
+		<div class="body">
+		
+			<!-- tabs -->
+			<div class="sky-tabs sky-tabs-pos-top-left sky-tabs-anim-flip sky-tabs-response-to-icons">				
+				<input type="radio" name="sky-tabs" checked id="sky-tab1" class="sky-tab-content-1">
+				<label for="sky-tab1"><span><span><i class="fa fa-home"></i>Overview</span></span></label>
+				
+				<input type="radio" name="sky-tabs" id="sky-tab2" class="sky-tab-content-2">
+				<label for="sky-tab2"><span><span><i class="fa fa-tasks"></i>Offsets</span></span></label>
+				
+				<input type="radio" name="sky-tabs" id="sky-tab3" class="sky-tab-content-3">
+				<label for="sky-tab3"><span><span><i class="fa fa-print"></i>Demo</span></span></label>
+				
+				<ul>
+					<li class="sky-tab-content-1">					
+						<div class="typography">
+							<h1>Grid System</h1>
+							<p>Grid system is fully responsive, utilizes 12 fluid columns. Below 768px viewports, the columns stack vertically.</p>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-1"><div class="inner">1/12</div></div>
+								<div class="grid-col grid-col-11"><div class="inner">11/12</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-2"><div class="inner">2/12</div></div>
+								<div class="grid-col grid-col-10"><div class="inner">10/12</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-3"><div class="inner">3/12</div></div>
+								<div class="grid-col grid-col-9"><div class="inner">9/12</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-4"><div class="inner">4/12</div></div>
+								<div class="grid-col grid-col-8"><div class="inner">8/12</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-5"><div class="inner">5/12</div></div>
+								<div class="grid-col grid-col-7"><div class="inner">7/12</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-6"><div class="inner">6/12</div></div>
+								<div class="grid-col grid-col-6"><div class="inner">6/12</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col"><div class="inner">12/12</div></div>
+							</div>
+						</div>						
+					</li>
+					
+					<li class="sky-tab-content-2">
+						<div class="typography">
+							<h1>Offsetting columns</h1>
+							<p>Move columns to the right using <strong>grid-col-offset-*</strong> classes. Each class increases the left margin of a column by a whole column.</p>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-11 grid-col-offset-1"><div class="inner">11/12 offset 1</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-10 grid-col-offset-2"><div class="inner">10/12 offset 2</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-9 grid-col-offset-3"><div class="inner">9/12 offset 3</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-8 grid-col-offset-4"><div class="inner">8/12 offset 4</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-7 grid-col-offset-5"><div class="inner">7/12 offset 5</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-6 grid-col-offset-6"><div class="inner">6/12 offset 6</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-5 grid-col-offset-7"><div class="inner">5/12 offset 7</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-4 grid-col-offset-8"><div class="inner">4/12 offset 8</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-3 grid-col-offset-9"><div class="inner">3/12 offset 9</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-2 grid-col-offset-10"><div class="inner">2/12 offset 10</div></div>
+							</div>
+							
+							<div class="grid-row">
+								<div class="grid-col grid-col-1 grid-col-offset-11"><div class="inner">1/12</div></div>
+							</div>
+						</div>
+					</li>
+					
+					<li class="sky-tab-content-3">
+						<div class="typography">
+							<h1>Nikola Tesla</h1>
+							<p>Nikola Tesla was a Serbian-American inventor, electrical engineer, mechanical engineer, physicist, and futurist best known for his contributions to the design of the modern alternating current (AC) electrical supply system.</p>
+							<p>Tesla started working in the telephony and electrical fields before emigrating to the United States in 1884 to work for Thomas Edison. He soon struck out on his own with financial backers, setting up laboratories/companies to develop a range of electrical devices. His patented AC induction motor and transformer were licensed by George Westinghouse, who also hired Tesla as a consultant to help develop an alternating current system. Tesla is also known for his high-voltage, high-frequency power experiments in New York and Colorado Springs which included patented devices and theoretical work used in the invention of radio communication, for his X-ray experiments, and for his ill-fated attempt at intercontinental wireless transmission in his unfinished Wardenclyffe Tower project.</p>
+							<div class="grid-row">
+								<div class="grid-col grid-col-4">
+									<h2>Early years</h2>
+									<p>Nikola Tesla was born on 10 July (O.S. 28 June) 1856 to Serb parents in the village of Smiljan, Austrian Empire (modern-day Croatia). His father, Milutin Tesla, was a priest of the Serbian Orthodox Church.</p>
+								</div>
+								<div class="grid-col grid-col-4">
+									<h2>Middle years</h2>
+									<p>In 1886, Tesla formed his own company, Tesla Electric Light & Manufacturing. The company installed electrical arc light based illumination systems designed by Tesla and also had designs for dynamo electric machine commutators, the first patents issued to Tesla in the US.</p>
+								</div>
+								<div class="grid-col grid-col-4">
+									<h2>Later years</h2>
+									<p>In 1928, Tesla received his last patent, U.S. Patent 1,655,114, for a biplane capable of taking off vertically (VTOL aircraft) and then be "gradually tilted through manipulation of the elevator devices" in flight until it was flying like a conventional plane.</p>
+								</div>
+							</div>
+						</div>
+					</li>				
+				</ul>
+			</div>
+			<!--/ tabs -->
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Documentation for Sky Tabs</title>
+		
+		<meta name="viewport" content="width=1024">
+		
+		<link rel="stylesheet" href="css/main.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body id="overview">
+		<article>
+			<!-- overview -->
+			<section>
+				<h1>Sky Tabs Documentation</h1>
+				<p>Sky Tabs is a clean, responsive solution for creating beautiful tabbed navigation without any javascript usage. It has different layouts, auto-height, responsive design, 9 color schemes, lots of customization options and can be easily integrated to any design.</p>
+				<p>If you have any questions that are beyond the scope of this documentation, please feel free to email via my user page contact form <a href="http://codecanyon.net/user/voky?ref=voky">here</a>.</p>
+			</section>
+			<!--/ overview -->
+			
+			<!-- integration -->
+			<section id="integration">
+				<h2>Integration</h2>
+				<ol>
+					<li>Download the zipped pack from codecanyon and extract to a folder on your computer.</li>
+					<li>Include necessary css and js files to your project.
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/font-awesome.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-tabs.css&quot;&gt;
+&lt;!--[if lt IE 9]&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-tabs-ie8.css&quot;&gt;
+	&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;
+	&lt;script src="js/sky-tabs-ie8.js"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;</pre>
+					</li>
+					<li>Copy HTML code from one of demo files.</li>
+					<li>Replace demo content with yours.</li>
+				</ol>
+			</section>
+			<!--/ integration -->
+			
+			<!-- html structure -->
+			<section id="html">
+				<h2>HTML structure</h2>
+				<p>The main HTML structure of the tabs consists of radios, labels and unordered list. You can see the example of code below.</p>
+<pre>&lt;div class=&quot;sky-tabs sky-tabs-pos-top-left&quot;&gt;				
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; checked id=&quot;sky-tab1&quot; class=&quot;sky-tab-content-1&quot;&gt;
+	&lt;label for=&quot;sky-tab1&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-bolt&quot;&gt;&lt;/i&gt;Tesla&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab2&quot; class=&quot;sky-tab-content-2&quot;&gt;
+	&lt;label for=&quot;sky-tab2&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-picture&quot;&gt;&lt;/i&gt;da Vinci&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab3&quot; class=&quot;sky-tab-content-3&quot;&gt;
+	&lt;label for=&quot;sky-tab3&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-cogs&quot;&gt;&lt;/i&gt;Einstein&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab4&quot; class=&quot;sky-tab-content-4&quot;&gt;
+	&lt;label for=&quot;sky-tab4&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-globe&quot;&gt;&lt;/i&gt;Newton&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;ul&gt;
+		&lt;li class=&quot;sky-tab-content-1&quot;&gt;					
+			&lt;div class=&quot;typography&quot;&gt;
+				&lt;h1&gt;Nikola Tesla&lt;/h1&gt;
+				&lt;p&gt;Serbian-American inventor, electrical engineer, mechanical engineer, physicist, and futurist best known for his contributions to the design of the modern alternating current (AC) electrical supply system.&lt;/p&gt;
+				&lt;p&gt;Tesla started working in the telephony and electrical fields before emigrating to the United States in 1884 to work for Thomas Edison. He soon struck out on his own with financial backers, setting up laboratories/companies to develop a range of electrical devices. His patented AC induction motor and transformer were licensed by George Westinghouse, who also hired Tesla as a consultant to help develop an alternating current system. Tesla is also known for his high-voltage, high-frequency power experiments in New York and Colorado Springs which included patented devices and theoretical work used in the invention of radio communication, for his X-ray experiments, and for his ill-fated attempt at intercontinental wireless transmission in his unfinished Wardenclyffe Tower project.&lt;/p&gt;
+				&lt;p&gt;Tesla's achievements and his abilities as a showman demonstrating his seemingly miraculous inventions made him world-famous. Although he made a great deal of money from his patents, he spent a lot on numerous experiments. He lived for most of his life in a series of New York hotels although the end of his patent income and eventual bankruptcy led him to live in diminished circumstances. Tesla still continued to invite the press to parties he held on his birthday to announce new inventions he was working and make (sometimes unusual) statements. Because of his pronouncements and the nature of his work over the years, Tesla gained a reputation in popular culture as the archetypal &quot;mad scientist&quot;. He died in room 3327 of the New Yorker Hotel on 7 January 1943.&lt;/p&gt;
+				&lt;p class=&quot;text-right&quot;&gt;&lt;em&gt;Find out more about Nikola Tesla from &lt;a href=&quot;http://en.wikipedia.org/wiki/Nikola_Tesla&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-2&quot;&gt;
+			&lt;div class=&quot;typography&quot;&gt;
+				&lt;h1&gt;Leonardo da Vinci&lt;/h1&gt;
+				&lt;p&gt;Italian Renaissance polymath: painter, sculptor, architect, musician, mathematician, engineer, inventor, anatomist, geologist, cartographer, botanist, and writer. His genius, perhaps more than that of any other figure, epitomized the Renaissance humanist ideal. Leonardo has often been described as the archetype of the Renaissance Man, a man of &quot;unquenchable curiosity&quot; and &quot;feverishly inventive imagination&quot;. He is widely considered to be one of the greatest painters of all time and perhaps the most diversely talented person ever to have lived. According to art historian Helen Gardner, the scope and depth of his interests were without precedent and &quot;his mind and personality seem to us superhuman, the man himself mysterious and remote&quot;. Marco Rosci states that while there is much speculation about Leonardo, his vision of the world is essentially logical rather than mysterious, and that the empirical methods he employed were unusual for his time.&lt;/p&gt;
+				&lt;p&gt;Born out of wedlock to a notary, Piero da Vinci, and a peasant woman, Caterina, at Vinci in the region of Florence, Leonardo was educated in the studio of the renowned Florentine painter, Verrocchio. Much of his earlier working life was spent in the service of Ludovico il Moro in Milan. He later worked in Rome, Bologna and Venice, and he spent his last years in France at the home awarded him by Francis I.&lt;/p&gt;
+				&lt;p class=&quot;text-right&quot;&gt;&lt;em&gt;Find out more about Leonardo da Vinci from &lt;a href=&quot;http://en.wikipedia.org/wiki/Leonardo_da_Vinci&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-3&quot;&gt;
+			&lt;div class=&quot;typography&quot;&gt;
+				&lt;h1&gt;Albert Einstein&lt;/h1&gt;
+				&lt;p&gt;German-born theoretical physicist who developed the general theory of relativity, one of the two pillars of modern physics (alongside quantum mechanics). While best known for his mass–energy equivalence formula E = mc2 (which has been dubbed &quot;the world's most famous equation&quot;), he received the 1921 Nobel Prize in Physics &quot;for his services to theoretical physics, and especially for his discovery of the law of the photoelectric effect&quot;. The latter was pivotal in establishing quantum theory.&lt;/p&gt;
+				&lt;p&gt;Near the beginning of his career, Einstein thought that Newtonian mechanics was no longer enough to reconcile the laws of classical mechanics with the laws of the electromagnetic field. This led to the development of his special theory of relativity. He realized, however, that the principle of relativity could also be extended to gravitational fields, and with his subsequent theory of gravitation in 1916, he published a paper on the general theory of relativity.&lt;/p&gt;
+				&lt;p&gt;He continued to deal with problems of statistical mechanics and quantum theory, which led to his explanations of particle theory and the motion of molecules. He also investigated the thermal properties of light which laid the foundation of the photon theory of light. In 1917, Einstein applied the general theory of relativity to model the large-scale structure of the universe.&lt;/p&gt;
+				&lt;p class=&quot;text-right&quot;&gt;&lt;em&gt;Find out more about Albert Einstein from &lt;a href=&quot;http://en.wikipedia.org/wiki/Albert_Einstein&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-4&quot;&gt;
+			&lt;div class=&quot;typography&quot;&gt;
+				&lt;h1&gt;Isaac Newton&lt;/h1&gt;
+				&lt;p&gt;English physicist and mathematician who is widely regarded as one of the most influential scientists of all time and as a key figure in the scientific revolution. His book Philosophi&aelig; Naturalis Principia Mathematica (&quot;Mathematical Principles of Natural Philosophy&quot;), first published in 1687, laid the foundations for most of classical mechanics. Newton also made seminal contributions to optics and shares credit with Gottfried Leibniz for the invention of the infinitesimal calculus.&lt;/p&gt;
+				&lt;p&gt;Newton's Principia formulated the laws of motion and universal gravitation that dominated scientists' view of the physical universe for the next three centuries. It also demonstrated that the motion of objects on the Earth and that of celestial bodies could be described by the same principles. By deriving Kepler's laws of planetary motion from his mathematical description of gravity, Newton removed the last doubts about the validity of the heliocentric model of the cosmos.&lt;/p&gt;
+				&lt;p class=&quot;text-right&quot;&gt;&lt;em&gt;Find out more about Isaac Newton from &lt;a href=&quot;http://en.wikipedia.org/wiki/Isaac_Newton&quot; target=&quot;_blank&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/li&gt;					
+	&lt;/ul&gt;
+&lt;/div&gt;</pre>
+			</section>
+			<!--/ html structure -->
+			
+			<!-- css structure -->
+			<section id="css">
+				<h2>CSS structure</h2>
+				<p>Sky Tabs includes 11 css files.</p>
+				<ul>
+					<li><strong>demo.css</strong> - demo page styles</li>
+					<li><strong>sky-tabs.css</strong> - required main styles</li>
+					<li><strong>sky-tabs-ie8.css</strong> - styles for IE8</li>
+					<li><strong>sky-tabs-red.css</strong> - red color scheme</li>
+					<li><strong>sky-tabs-orange.css</strong> - orange color scheme</li>
+					<li><strong>sky-tabs-green.css</strong> - green color scheme</li>
+					<li><strong>sky-tabs-purple.css</strong> - purple color scheme</li>
+					<li><strong>sky-tabs-pink.css</strong> - pink color scheme</li>
+					<li><strong>sky-tabs-yellow.css</strong> - yellow color scheme</li>
+					<li><strong>sky-tabs-blue.css</strong> - blue color scheme</li>
+					<li><strong>sky-tabs-black.css</strong> - black color scheme</li>
+				</ul>
+				<p>The file "sky-tabs.css" contains all of the specific styling and separated into sections:</p>
+				<ul>
+					<li>font</li>
+					<li>defaults</li>
+					<li>positions</li>
+					<li>animations</li>
+					<li>grid system</li>
+					<li>typography</li>
+					<li>icons</li>
+					<li>pad</li>
+					<li>phone</li>
+				</ul>
+				<p>If you would like to edit a specific section, simply find the appropriate label in the CSS file.</p>
+			</section>
+			<!--/ css structure -->
+			
+			<!-- layouts -->
+			<section id="layouts">
+				<h2>Layouts</h2>
+				<p>Sky Tabs has 7 different layouts. To use one of them you need to add the appropriate class to tabs container. All available layouts and classes listed in the table below.</p>
+				<table>
+					<tbody><tr>
+						<th>Layout</th>
+						<th>Class</th>
+					</tr>
+					<tr>
+						<td>Horizontal top left</td>
+						<td>sky-tabs-pos-top-left</td>
+					</tr>
+					<tr>
+						<td>Horizontal top right</td>
+						<td>sky-tabs-pos-top-right</td>
+					</tr>
+					<tr>
+						<td>Horizontal top center</td>
+						<td>sky-tabs-pos-top-center</td>
+					</tr>
+					<tr>
+						<td>Horizontal top justify</td>
+						<td>sky-tabs-pos-top-justify sky-tabs-amount-*</td>
+					</tr>
+					<tr>
+						<td>Horizontal top left+right</td>
+						<td>sky-tabs-pos-top-left + inverse</td>
+					</tr>
+					<tr>
+						<td>Vertical left</td>
+						<td>sky-tabs-pos-left</td>
+					</tr>
+					<tr>
+						<td>Vertical right</td>
+						<td>sky-tabs-pos-right</td>
+					</tr>
+				</tbody></table>
+				<p>* Note: you need to set number of elements when you are using justify alignment.</p>
+			</section>
+			<!--/ layouts -->	
+			
+			<!-- mobile versions -->
+			<section id="mobile">
+				<h2>Mobile versions</h2>
+				<p>Sky Tabs includes 3 different responsive versions: icons, stack and switcher. To choose one of them you need to add specific class to the main container: <strong>sky-tabs-response-to-switcher</strong>, <strong>sky-tabs-response-to-stack</strong> or <strong>sky-tabs-response-to-icons</strong>. If you don't want to use responsiveness just do not add any of these classes.</p>
+				<pre>&lt;div class=&quot;sky-tabs sky-tabs-pos-top-left sky-tabs-response-to-icons&quot;&gt;				
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; checked id=&quot;sky-tab1&quot; class=&quot;sky-tab-content-1&quot;&gt;
+	&lt;label for=&quot;sky-tab1&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-bolt&quot;&gt;&lt;/i&gt;Tesla&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab2&quot; class=&quot;sky-tab-content-2&quot;&gt;
+	&lt;label for=&quot;sky-tab2&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-picture&quot;&gt;&lt;/i&gt;da Vinci&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab3&quot; class=&quot;sky-tab-content-3&quot;&gt;
+	&lt;label for=&quot;sky-tab3&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-cogs&quot;&gt;&lt;/i&gt;Einstein&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab4&quot; class=&quot;sky-tab-content-4&quot;&gt;
+	&lt;label for=&quot;sky-tab4&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-globe&quot;&gt;&lt;/i&gt;Newton&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;ul&gt;
+		&lt;li class=&quot;sky-tab-content-1&quot;&gt;
+			...
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-2&quot;&gt;
+			...
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-3&quot;&gt;
+			...
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-4&quot;&gt;
+			...
+		&lt;/li&gt;					
+	&lt;/ul&gt;
+&lt;/div&gt;</pre>
+				<p>Also, when you are using <strong>switcher</strong> version you need to add additional element:</p>
+				<pre>&lt;div class=&quot;sky-tabs sky-tabs-pos-top-left sky-tabs-response-to-switcher&quot;&gt;				
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; checked id=&quot;sky-tab1&quot; class=&quot;sky-tab-content-1&quot;&gt;
+	&lt;label for=&quot;sky-tab1&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-bolt&quot;&gt;&lt;/i&gt;Tesla&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab2&quot; class=&quot;sky-tab-content-2&quot;&gt;
+	&lt;label for=&quot;sky-tab2&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-picture&quot;&gt;&lt;/i&gt;da Vinci&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab3&quot; class=&quot;sky-tab-content-3&quot;&gt;
+	&lt;label for=&quot;sky-tab3&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-cogs&quot;&gt;&lt;/i&gt;Einstein&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;input type=&quot;radio&quot; name=&quot;sky-tabs&quot; id=&quot;sky-tab4&quot; class=&quot;sky-tab-content-4&quot;&gt;
+	&lt;label for=&quot;sky-tab4&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;i class=&quot;icon-globe&quot;&gt;&lt;/i&gt;Newton&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+
+	&lt;label class=&quot;switcher&quot;&gt;&lt;span&gt;&lt;span&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;icon-reorder&quot;&gt;&lt;/i&gt;Tabs&lt;/a&gt;&lt;/span&gt;&lt;/span&gt;&lt;/label&gt;
+	
+	&lt;ul&gt;
+		&lt;li class=&quot;sky-tab-content-1&quot;&gt;
+			...
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-2&quot;&gt;
+			...
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-3&quot;&gt;
+			...
+		&lt;/li&gt;
+		
+		&lt;li class=&quot;sky-tab-content-4&quot;&gt;
+			...
+		&lt;/li&gt;					
+	&lt;/ul&gt;
+&lt;/div&gt;</pre>
+			</section>
+			<!--/ mobile versions -->
+			
+			<!-- animations -->
+			<section id="animations">
+				<h2>Animations</h2>
+				<p>There are 12 css3 animation effects. To use one of them you need to add the appropriate class to tabs container. All available effects and classes listed in the table below.</p>
+				<table>
+					<tbody><tr>
+						<th>Animation</th>
+						<th>Class</th>
+					</tr>
+					<tr>
+						<td>Fade</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>Flip</td>
+						<td>sky-tabs-anim-flip</td>
+					</tr>
+					<tr>
+						<td>Scale</td>
+						<td>sky-tabs-anim-scale</td>
+					</tr>
+					<tr>
+						<td>Rotate</td>
+						<td>sky-tabs-anim-rotate</td>
+					</tr>
+					<tr>
+						<td>Slide up</td>
+						<td>sky-tabs-anim-slide-up</td>
+					</tr>
+					<tr>
+						<td>Slide right</td>
+						<td>sky-tabs-anim-slide-right</td>
+					</tr>
+					<tr>
+						<td>Slide down</td>
+						<td>sky-tabs-anim-slide-down</td>
+					</tr>
+					<tr>
+						<td>Slide left</td>
+						<td>sky-tabs-anim-slide-left</td>
+					</tr>
+					<tr>
+						<td>Slide up right</td>
+						<td>sky-tabs-anim-slide-up-right</td>
+					</tr>
+					<tr>
+						<td>Slide down right</td>
+						<td>sky-tabs-anim-slide-down-right</td>
+					</tr>
+					<tr>
+						<td>Slide down left</td>
+						<td>sky-tabs-anim-slide-down-left</td>
+					</tr>
+					<tr>
+						<td>Slide up left</td>
+						<td>sky-tabs-anim-slide-up-left</td>
+					</tr>
+				</tbody></table>
+			</section>
+			<!--/ animations -->
+			
+			<!-- schemes -->
+			<section id="schemes">
+				<h2>Color schemes</h2>
+				<p>There are 9 color schemes at your disposal. Cyan is the default scheme and to choose other you need to include appropriate css file. For example, if you want to use orange scheme include <strong>sky-tabs-orange.css</strong> file:</p>
+<pre>&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-tabs.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/sky-tabs-orange.css&quot;&gt;</pre>
+			</section>
+			<!--/ schemes -->	
+			
+			<!-- credits -->
+			<section id="credits">
+				<h2>Credits</h2>
+				<ol>
+					<li><a href="http://jquery.com" target="_blank">jQuery library</a> by The jQuery Foundation</li>
+					<li><a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a> by Dave Gandy</li>
+				</ol>
+			</section>
+			<!--/ credits -->
+		</article>
+		
+		<aside>
+			<!-- logo -->
+			<img src="img/thumbnail.png" alt="" />
+			<!--/ logo -->
+			
+			<!-- main nav -->
+			<nav id="main-nav">
+				<ul>
+					<li><a href="#overview">Overview</a></li>
+					<li><a href="#integration">Integration</a></li>
+					<li><a href="#html">HTML structure</a></li>
+					<li><a href="#css">CSS structure</a></li>
+					<li><a href="#layouts">Layouts</a></li>
+					<li><a href="#mobile">Mobile versions</a></li>
+					<li><a href="#animations">Animations</a></li>
+					<li><a href="#schemes">Color schemes</a></li>
+					<li><a href="#credits">Credits</a></li>
+				</ul>
+			</nav>
+			<!--/ main nav -->
+			
+			<!-- copyrights -->
+			<p>Created by <a href="http://codecanyon.net/user/voky?ref=voky">Voky</a></p>
+			<!--/ copyrights -->
+		</aside>
+	</body>
+</html>

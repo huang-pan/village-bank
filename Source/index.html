@@ -1,103 +1,160 @@
+<!DOCTYPE html> 
 <html>
-<head>
-<script>
-    var web3 = parent.web3;
-    var theContract = contracts.bank.contract;
-	
-    function depositToSavings() {
-		var depVal = document.getElementById("savingsForm").value;
-        theContract.deposit(depVal);
-        web3.eth.transact({to: theContract.address,
-                           value: depVal});
-//        web3.eth.transact({to: theContract.address,
-//                                  value: depVal}).deposit();
-// Why not the following?  The documentation seems to say this is right??!?!
-//        web3.eth.sendTransaction({to: theContract.address,
-//                                  value: depVal});
-    }
-    function submitWDRW() {
-        theContract.withdraw(document.getElementById("savingsForm").value);
-    }
-    function applyForLoan() {
-		document.getElementById("myLoanVal").innerHTML = document.getElementById("loanForm").value;
-        theContract.getLoan(document.getElementById("loanForm").value,1);
-    }
-    function payLoanOff() {
-		var payoff = document.getElementById("loanForm").value;
-        theContract.payLoanStupid(payoff);
-        web3.eth.transact({to: theContract.address,
-                           value: payoff});
-		document.getElementById("myLoanVal").innerHTML = payoff;
-    }
-    function checkLoanFinal() {
-		document.getElementById("myCheckLoanVal").innerHTML = 
-			theContract.checkLoanFinal(document.getElementById("checkLoanForm").value,1);
-    }
-    function setSaveRate() {
-		var rate = (parseFloat(document.getElementById("saveRateInput").value)/100+1)*8192;
-		document.getElementById("mySaveRate").innerHTML = rate;
-        theContract.setSaveRate(rate);
-    }
-    function setLoanRate() {
-		var rate = (parseFloat(document.getElementById("loanRateInput").value)/100+1)*8192;
-		document.getElementById("myLoanRate").innerHTML = rate;
-        theContract.setLoanRate(rate);
-    }
-//E as in symbol for Ethereum &Xi;
-</script>
-</head>
-<body>
-	&#272;eBank<br>
-	Bank address: <span id="bankAddr">Uninitialized Bank addr</span><br>
-	Bank owner: <span id="bankOwner">Uninitialized bank owner</span><br>
-	Bank balance: <span id="bankBalance">Uninitialized bank balance</span><br>
-	Bank reserve: <span id="bankReserve">Uninitialized bank balance</span><br>
-	Savings Interest Rate: <span id="saveRate">Uninitialized </span>%
-	    <input id="saveRateInput" type="text" name="name">%
-        <button onclick="setSaveRate()">Set Interest Rate</button>
-		<span id="mySaveRate">mySaveRate</span><br>
-	Loan Interest Rate: <span id="loanRate">Uninitialized </span>%
-		<input id="loanRateInput" type="text" name="name">%
-        <button onclick="setLoanRate()">Set Interest Rate</button>
-		<span id="myLoanRate">myLoanRate</span><br>
-	<br>
-	My Ethereum address: <span id="myAddr">?</span><br>
-	My Ethereum balance: <span id="ether">?</span> Weis<br>
-	My Credit Score: <span id="creditScore">?</span><br>
-	My Savings Balance: <span id="savBal">Uninitialized</span>
-		<input id="savingsForm" type="text" name="name">
-        <button onclick="depositToSavings()">Deposit</button>
-        <button onclick="submitWDRW()">Withdraw</button>
-	<br>
-	My Loan Balance: <span id="loanBal">Uninitialized</span>
-	    <input id="loanForm" type="text" name="name">
-        <button onclick="applyForLoan()">Apply For Loan</button>
-        <button onclick="payLoanOff()">Pay Loan Off</button>
-        <span id="myLoanVal">Uninitialized</span>
-	<br>
-	Check Final Amount given initial loan of
-	    <input id="checkLoanForm" type="text" name="name">
-        <button onclick="checkLoanFinal()">Check Final Amount</button>
-        <span id="myCheckLoanVal">Uninitialized</span>
-<script>
-	web3.eth.watch('pending').changed(function() {
-  		  var balance = web3.eth.balanceAt(web3.eth.coinbase);
-	  	  document.getElementById("ether").innerText = web3.toDecimal(balance);
-  		  document.getElementById("myAddr").innerText = web3.eth.coinbase;
-  	});
-    function update() {
-          document.getElementById("bankBalance").innerHTML = theContract.queryBankBal();
-          document.getElementById("bankReserve").innerHTML = theContract.queryReserve();
-          document.getElementById("bankAddr").innerHTML = theContract.address;
-          document.getElementById("bankOwner").innerHTML = theContract.queryOwner();
-          document.getElementById("creditScore").innerHTML = theContract.queryCreditScore();
-          document.getElementById("savBal").innerHTML = theContract.querySavingsBalance();
-          document.getElementById("loanBal").innerHTML = theContract.queryLoanBalance();
-          document.getElementById("saveRate").innerHTML = (theContract.querySaveRate()/8192-1)*100;
-          document.getElementById("loanRate").innerHTML = (theContract.queryLoanRate()/8192-1)*100;
+	<head>
+		<meta charset="utf-8">		
+		<title>Village Bank</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+		
+		<link rel="stylesheet" href="css/demo.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/sky-tabs.css">
+		
+		<!--[if lt IE 9]>
+			<link rel="stylesheet" href="css/sky-tabs-ie8.css">
+			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script src="js/sky-tabs-ie8.js"></script>
+		<![endif]-->
+		
+		<script>
+			var web3 = parent.web3;
+			var theContract = contracts.bank.contract;
 
-		}
-    update();
-</script>
-</body>
+			function depositToSavings() {
+				var depVal = document.getElementById("savingsForm").value;
+				theContract.deposit(depVal);
+				web3.eth.transact({to: theContract.address,
+								   value: depVal});
+				//        web3.eth.transact({to: theContract.address,
+				//                                  value: depVal}).deposit();
+				// Why not the following?  The documentation seems to say this is right??!?!
+				//        web3.eth.sendTransaction({to: theContract.address,
+				//                                  value: depVal});
+			}
+			function submitWDRW() {
+				theContract.withdraw(document.getElementById("savingsForm").value);
+			}
+			function applyForLoan() {
+				document.getElementById("myLoanVal").innerHTML = document.getElementById("loanForm").value;
+				theContract.getLoan(document.getElementById("loanForm").value,1);
+			}
+			function payLoanOff() {
+				var payoff = document.getElementById("loanForm").value;
+				theContract.payLoanStupid(payoff);
+				web3.eth.transact({to: theContract.address,
+								   value: payoff});
+				document.getElementById("myLoanVal").innerHTML = payoff;
+			}
+			function checkLoanFinal() {
+				document.getElementById("myCheckLoanVal").innerHTML = 
+					theContract.checkLoanFinal(document.getElementById("checkLoanForm").value,1);
+			}
+			function setSaveRate() {
+				var rate = (parseFloat(document.getElementById("saveRateInput").value)/100+1)*8192;
+				document.getElementById("mySaveRate").innerHTML = rate;
+				theContract.setSaveRate(rate);
+			}
+			function setLoanRate() {
+				var rate = (parseFloat(document.getElementById("loanRateInput").value)/100+1)*8192;
+				document.getElementById("myLoanRate").innerHTML = rate;
+				theContract.setLoanRate(rate);
+			}
+		</script>
+		
+	</head>
+
+	<body class="bg-cyan">		
+		<div class="body">
+		
+			<font size="6"><u><b>Village Bank</b></u></font><br>
+			Bank address: <span id="bankAddr">Uninitialized Bank addr</span><br>
+			Bank owner: <span id="bankOwner">Uninitialized bank owner</span><br>
+			Bank balance: <span id="bankBalance">Uninitialized bank balance</span><br>
+			Bank reserve: <span id="bankReserve">Uninitialized bank balance</span><br>
+			<br>
+			My Ethereum address: <span id="myAddr">?</span><br>
+			My Ethereum balance: <span id="ether">?</span> Weis<br>
+			<br>
+			
+			<script>
+				web3.eth.watch('pending').changed(function() {
+					  var balance = web3.eth.balanceAt(web3.eth.coinbase);
+					  document.getElementById("ether").innerText = web3.toDecimal(balance);
+					  document.getElementById("myAddr").innerText = web3.eth.coinbase;
+				});
+				function update() {
+					  document.getElementById("bankBalance").innerHTML = theContract.queryBankBal();
+					  document.getElementById("bankReserve").innerHTML = theContract.queryReserve();
+					  document.getElementById("bankAddr").innerHTML = theContract.address;
+					  document.getElementById("bankOwner").innerHTML = theContract.queryOwner();
+					  document.getElementById("savBal").innerHTML = theContract.querySavingsBalance();
+					  document.getElementById("loanBal").innerHTML = theContract.queryLoanBalance();
+					  document.getElementById("saveRate").innerHTML = (theContract.querySaveRate()/8192-1)*100;
+					  document.getElementById("loanRate").innerHTML = (theContract.queryLoanRate()/8192-1)*100;
+					}
+				update();
+			</script>
+
+			<!-- tabs -->
+			<div class="sky-tabs sky-tabs-amount-4 sky-tabs-pos-top-justify sky-tabs-anim-flip sky-tabs-response-to-icons">
+				<input type="radio" name="sky-tabs" checked id="sky-tab1" class="sky-tab-content-1">
+				<label for="sky-tab1"><span><span><b>Bank Parameters</b></span></span></label>
+				
+				<input type="radio" name="sky-tabs" id="sky-tab2" class="sky-tab-content-2">
+				<label for="sky-tab2"><span><span><b>Savings</b></span></span></label>
+				
+				<input type="radio" name="sky-tabs" id="sky-tab3" class="sky-tab-content-3">
+				<label for="sky-tab3"><span><span><b>Loan</b></span></span></label>
+				
+				<input type="radio" name="sky-tabs" id="sky-tab4" class="sky-tab-content-4">
+				<label for="sky-tab4"><span><span><b>To Be Implemented</b></span></span></label>
+
+				<ul>
+					<li class="sky-tab-content-1">					
+						<b>Annual Savings Interest Rate:</b> <span id="saveRate">Uninitialized </span>%<br><br>
+						<button type="button" class="btn" onclick="setSaveRate()">Set Interest Rate</button>
+						<input id="saveRateInput" type="text" name="name">%<br><br>
+						<span id="mySaveRate">mySaveRate</span><br><br>
+						
+						<b>Annual Loan Interest Rate:</b> <span id="loanRate">Uninitialized </span>%<br><br>
+						<button type="button" class="btn" onclick="setLoanRate()">Set Interest Rate</button>
+						<input id="loanRateInput" type="text" name="name">%<br><br>
+						<span id="myLoanRate">myLoanRate</span>
+					</li>
+					
+					<li class="sky-tab-content-2">
+						<b>My Savings Balance:</b> <span id="savBal">Uninitialized</span><br><br>
+						<button type="button" class="btn" onclick="depositToSavings()">Deposit</button>
+						<input id="savingsForm" type="text" name="name"><br><br>
+						<button type="button" class="btn" onclick="submitWDRW()">Withdraw</button>
+					</li>
+					
+					<li class="sky-tab-content-3">
+						<b>My Loan Balance:</b> <span id="loanBal">Uninitialized</span><br><br>
+						<button type="button" class="btn" onclick="applyForLoan()">Apply For Loan</button>
+						<input id="loanForm" type="text" name="name"><br><br>
+						<button type="button" class="btn" onclick="payLoanOff()">Pay Loan Off</button><br><br>
+						<span id="myLoanVal">Uninitialized</span><br><br>
+						
+						<b>Check Final Amount given initial loan of</b> <input id="checkLoanForm" type="text" name="name"><br><br>
+						<button type="button" class="btn" onclick="checkLoanFinal()">Check Final Amount</button><br><br>
+						<span id="myCheckLoanVal">Uninitialized</span>
+					</li>
+					
+					<li class="sky-tab-content-4">
+						Bank Reserves tied to Ethereum Account Balance<br>
+						Reserve calculations & how they affect Savings & Loan Accounts<br>
+						Max loan time<br>
+						Loan penalties<br>
+						MultiSig social fund<br>
+						Bank structure: members & elders<br>
+						ID management system<br>
+						Multiple Banking Groups<br>
+					</li>
+				</ul>
+			</div>
+			<!--/ tabs -->
+			
+		</div>		
+	</body>
 </html>
