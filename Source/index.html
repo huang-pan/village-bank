@@ -1,0 +1,62 @@
+<html>
+<head>
+<script>
+    var web3 = parent.web3;
+    var theContract = contracts.bank.contract;
+	
+    function submitSav() {
+		var depVal = document.getElementById("savForm").value;
+		document.getElementById("tmp").innerHTML = depVal;
+        theContract.deposit(depVal);
+        web3.eth.transact({to: theContract.address,
+                           value: depVal});
+//        web3.eth.transact({to: theContract.address,
+//                                  value: depVal}).deposit();
+// Why not the following?  The documentation seems to say this is right??!?!
+//        web3.eth.sendTransaction({to: theContract.address,
+//                                  value: depVal});
+    }
+    function submitWDRW() {
+        theContract.withdraw(document.getElementById("wdrwForm").value);
+    }
+//E as in symbol for Ethereum &Xi;
+</script>
+</head>
+<body>
+	&#272;eBank<br>
+	Bank address: <span id="bankAddr">Uninitialized Bank addr</span><br>
+	Bank owner: <span id="bankOwner">Uninitialized bank owner</span><br>
+	Bank balance: <span id="bankBalance">Uninitialized bank balance</span><br>
+	Bank reserve: <span id="bankReserve">Uninitialized bank balance</span><br>
+
+	<br>
+	My Ethereum address: <span id="myAddr">?</span><br>
+	My Ethereum balance: <span id="ether">?</span> Weis<br>
+	My Savings Balance: <span id="savBal">Uninitialized</span><br>
+	My Loan Balance: <span id="loanBal">Uninitialized</span><br>
+	<br>
+		Send to Savings: <input id="savForm" type="text" name="name">
+        <button onclick="submitSav()">Submit</button>
+	    <span id="tmp">tmp</span>
+	<br>
+		Withdraw from Savings: <input id="wdrwForm" type="text" name="name">
+        <button onclick="submitWDRW()">Submit</button>
+
+<script>
+	web3.eth.watch('pending').changed(function() {
+  		  var balance = web3.eth.balanceAt(web3.eth.coinbase);
+	  	  document.getElementById("ether").innerText = web3.toDecimal(balance);
+  		  document.getElementById("myAddr").innerText = web3.eth.coinbase;
+  	});
+    function update() {
+          document.getElementById("bankBalance").innerHTML = theContract.queryBankBal();
+          document.getElementById("bankReserve").innerHTML = theContract.queryReserve();
+          document.getElementById("bankAddr").innerHTML = theContract.address;
+          document.getElementById("bankOwner").innerHTML = theContract.queryOwner();
+          document.getElementById("savBal").innerHTML = theContract.querySavingsBalance();
+          document.getElementById("loanBal").innerHTML = theContract.queryLoanBalance();
+		}
+    update();
+</script>
+</body>
+</html>
