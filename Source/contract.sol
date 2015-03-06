@@ -16,16 +16,19 @@ contract bank {
     function bank() { // Constructor
         owner = msg.sender;
 		reserve = msg.value;
+		saveRate = 9216; // (12.5/100+1)*8192
+		loanRate = 9216; // (12.5/100+1)*8192
     }
+	
     function calcInterest(uint rateP1, uint numBlocks) constant returns (uint rate) {
         uint rateT = rateP1;
 		for (uint ix = 0; ix<numBlocks;ix++) {
-			rateT *= rateP1;
+			rateT *= rateP1/8192;
         }
         return rateT;
     }
     // Savings Deposit
-//    function deposit() { // This is the right 'deposit'
+//    function deposit() { // This is the right 'deposit' technique
 //        reserve +=msg.value;
 //        saveBalances[msg.sender] += msg.value; // balances initialized to 0
 //    }
@@ -52,27 +55,37 @@ contract bank {
 
     // Get a loan
     function getLoan(uint amount, uint numBlocks) {
-		if (prevUpdateBlock < block.number) { // maybe this is always true?
-        }
+//		if (prevUpdateBlock < block.number) { // maybe this is always true?
+//        }
 
-        uint finalAmount = amount*calcInterest(loanRate, numBlocks);
-		if ((creditScore[msg.sender] >= finalAmount) ||
-			(saveBalances[msg.sender] >= finalAmount)) {
+		uint finalAmount = (amount*calcInterest(loanRate, numBlocks))/8192;
+		if ((creditScore[msg.sender] >= finalAmount) ||	(saveBalances[msg.sender] >= finalAmount)) {
 			msg.sender.send(amount);
             loanBalances[msg.sender] += finalAmount;
+			reserve-=amount;
         } // maybe send an error
     }
     // Pay a loan off
-    function payLoan() {
+    function payLoan() { // this function is close to the right
         if (loanBalances[msg.sender] <= msg.value) {
             // some logic to actually take the money from the borrower,
             // and return any over-payment
-            loanBalances[msg.sender] = 0;
             if (loanBlock[msg.sender] == block.number) {
                 creditScore[msg.sender] += loanBalances[msg.sender];
             }
+            loanBalances[msg.sender] = 0;
         } 
     }
+    function payLoanStupid(uint payOff) {
+        if (loanBalances[msg.sender] == payOff) {
+            if (loanBlock[msg.sender] == block.number) {
+                creditScore[msg.sender] += loanBalances[msg.sender];
+            }
+            loanBalances[msg.sender] = 0;
+			reserve+=payOff;
+        } 
+    }
+
     // compound savings on a regular basis. This means 
 //    function compoundSavings() {
 //    }
@@ -85,7 +98,25 @@ contract bank {
         return owner; }
     function queryBankBal() constant returns (uint bal) {
 		return address(this).balance; }
+    function queryLoanRate() constant returns (uint rate) {
+		return loanRate; }
+    function queryCreditScore() constant returns (uint rate) {
+		return creditScore[msg.sender]; }
+    function querySaveRate() constant returns (uint rate) {
+		return saveRate; }
     function queryReserve() constant returns (uint resrv) {
 		return reserve; }
-
+	
+    function setSaveRate(uint rate) {
+		if (msg.sender==owner) {
+			saveRate=rate;
+		}}
+    function setLoanRate(uint rate) {
+		if (msg.sender==owner) {
+			loanRate=rate;
+		}}
+	function checkLoanFinal(uint amount, uint numBlocks) constant returns (uint retval){
+        uint finalAmount = amount*calcInterest(loanRate, numBlocks);
+		return finalAmount/8192;
+	}
 }
