@@ -66,20 +66,20 @@
 	<body class="bg-cyan">		
 		<div class="body">
 		
-			<font size="6"><u><b>Village Bank</b></u></font><br>
-			Bank address: <span id="bankAddr">Uninitialized Bank addr</span><br>
-			Bank owner: <span id="bankOwner">Uninitialized bank owner</span><br>
-			Bank balance: <span id="bankBalance">Uninitialized bank balance</span><br>
-			Bank reserve: <span id="bankReserve">Uninitialized bank balance</span><br>
-			Bank reserve percent: <span>Uninitialized</span><br>
-			Annual Savings Rate (%): <span>Uninitialized</span><br>
-			Annual Loan Rate (%): <span>Uninitialized</span><br>
-			Max Loan Amount (%): <span>Uninitialized</span><br>
+			<font size="6"><u><b>Justice League Village Bank</b></u></font><br>
+			Date: <span>3/10/2015</span> Week: <span>11</span><br><br>
+			Bank owner: <span id="bankOwner">Superman</span><br>
+			Number of elders: <span>3</span><br>
+			Bank balance ($): <span id="bankBalance">10000</span><br>
+			Bank reserve (%): <span>50</span><br><br>
+			Annual Savings Rate (%): <span>2</span><br>
+			Annual Loan Rate (%): <span>6</span><br>
+			Social Fund Donation (%): <span>3</span><br><br>
+			Max Loan Amount (%): <span>300</span><br>
+			Max Loan Length (weeks): <span>52</span><br>
+			Loan Penalty (%): <span>5</span><br>
 			<br>
-			My Ethereum address: <span id="myAddr">?</span><br>
-			My Ethereum balance: <span id="ether">?</span> Weis<br>
-			<br>
-			
+
 			<script>
 				web3.eth.watch('pending').changed(function() {
 					  var balance = web3.eth.balanceAt(web3.eth.coinbase);
@@ -100,63 +100,138 @@
 			</script>
 
 			<!-- tabs -->
-			<div class="sky-tabs sky-tabs-amount-4 sky-tabs-pos-top-justify sky-tabs-anim-flip sky-tabs-response-to-icons">
+			<div class="sky-tabs sky-tabs-amount-7 sky-tabs-pos-top-justify sky-tabs-anim-flip sky-tabs-response-to-icons">
 				<input type="radio" name="sky-tabs" checked id="sky-tab1" class="sky-tab-content-1">
 				<label for="sky-tab1"><span><span><b>Bank Parameters</b></span></span></label>
 				
 				<input type="radio" name="sky-tabs" id="sky-tab2" class="sky-tab-content-2">
-				<label for="sky-tab2"><span><span><b>Savings</b></span></span></label>
+				<label for="sky-tab2"><span><span><b>Members</b></span></span></label>
 				
 				<input type="radio" name="sky-tabs" id="sky-tab3" class="sky-tab-content-3">
-				<label for="sky-tab3"><span><span><b>Loan</b></span></span></label>
+				<label for="sky-tab3"><span><span><b>Elders</b></span></span></label>
 				
 				<input type="radio" name="sky-tabs" id="sky-tab4" class="sky-tab-content-4">
-				<label for="sky-tab4"><span><span><b>To Be Implemented</b></span></span></label>
+				<label for="sky-tab4"><span><span><b>Savings</b></span></span></label>
+
+				<input type="radio" name="sky-tabs" id="sky-tab5" class="sky-tab-content-5">
+				<label for="sky-tab5"><span><span><b>Loan</b></span></span></label>
+
+				<input type="radio" name="sky-tabs" id="sky-tab6" class="sky-tab-content-6">
+				<label for="sky-tab6"><span><span><b>Social Fund</b></span></span></label>
+
+				<input type="radio" name="sky-tabs" id="sky-tab7" class="sky-tab-content-7">
+				<label for="sky-tab7"><span><span><b>TBD</b></span></span></label>
 
 				<ul>
 					<li class="sky-tab-content-1">					
-						<b>Annual Savings Interest Rate:</b> <span id="saveRate">Uninitialized </span>%<br><br>
+						<b>Number of Bank Elders:</b> <span id="saveRate">3</span>
+						<button type="button" class="btn" onclick="setSaveRate()">Set Number</button>
+						<input id="saveRateInput" type="text" name="name"><br><br>
+				
+						<b>Bank Reserve (%):</b> <span id="saveRate">50</span>
+						<button type="button" class="btn" onclick="setSaveRate()">Set Reserve %</button>
+						<input id="saveRateInput" type="text" name="name"><br><br>
+			
+						<b>Annual Savings Interest Rate (%):</b> <span id="saveRate">2</span>
 						<button type="button" class="btn" onclick="setSaveRate()">Set Interest Rate</button>
-						<input id="saveRateInput" type="text" name="name">%<br><br>
-						<span id="mySaveRate">mySaveRate</span><br><br>
+						<input id="saveRateInput" type="text" name="name"><br><br>
 						
-						<b>Annual Loan Interest Rate:</b> <span id="loanRate">Uninitialized </span>%<br><br>
+						<b>Annual Loan Interest Rate (%):</b> <span id="loanRate">6</span>
 						<button type="button" class="btn" onclick="setLoanRate()">Set Interest Rate</button>
-						<input id="loanRateInput" type="text" name="name">%<br><br>
-						<span id="myLoanRate">myLoanRate</span>
+						<input id="loanRateInput" type="text" name="name"><br><br>
+
+						<b>Social Fund Donation Rate (%):</b> <span id="loanRate">3</span>
+						<button type="button" class="btn" onclick="setLoanRate()">Set Donation Rate</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
+						
+						<b>Max Loan Amount (%):</b> <span id="loanRate">300</span>
+						<button type="button" class="btn" onclick="setLoanRate()">Set Percentage</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
+			
+						<b>Max Loan Length (weeks):</b> <span id="loanRate">52</span>
+						<button type="button" class="btn" onclick="setLoanRate()">Set Max Loan Length</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
+			
+						<b>Weekly Loan Penalty (%):</b> <span id="loanRate">5</span>
+						<button type="button" class="btn" onclick="setLoanRate()">Set Penalty Rate</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
 					</li>
-					
+
 					<li class="sky-tab-content-2">
-						<b>My Savings Balance:</b> <span id="savBal">Uninitialized</span><br><br>
-						<button type="button" class="btn" onclick="depositToSavings()">Deposit</button>
-						<input id="savingsForm" type="text" name="name"><br><br>
-						<button type="button" class="btn" onclick="submitWDRW()">Withdraw</button>
+						<b><u>Listbox needs to be implemented</u></b><br>
+						Superman<br>
+						Wonder Woman<br>
+						Batman<br>
+						The Martian Manhunter<br>
+						The Flash<br>
+						Aquaman<br>
+						The Green Lantern<br>
+						Cyborg<br>
+						Hawkgirl<br>
+						Green Arrow<br>
+						Captain Atom<br>
+						Black Canary<br>
+						Zatanna<br>
+						Captain Marvel<br><br>
+						<button type="button" class="btn" onclick="setLoanRate()">Add Member</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
+
+						<button type="button" class="btn" onclick="setLoanRate()">Delete Member</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
 					</li>
 					
 					<li class="sky-tab-content-3">
-						<b>My Loan Balance:</b> <span id="loanBal">Uninitialized</span><br><br>
-						<button type="button" class="btn" onclick="applyForLoan()">Apply For Loan</button>
-						<input id="loanForm" type="text" name="name"><br><br>
-						<button type="button" class="btn" onclick="payLoanOff()">Pay Loan Off</button><br><br>
-						<span id="myLoanVal">Uninitialized</span><br><br>
-						
-						<b>Check Final Amount given initial loan of</b> <input id="checkLoanForm" type="text" name="name"><br><br>
-						<button type="button" class="btn" onclick="checkLoanFinal()">Check Final Amount</button><br><br>
-						<span id="myCheckLoanVal">Uninitialized</span>
+						<b>President:</b> Superman<br>
+						<b>Treasurer:</b> Wonder Woman<br>
+						<b>Secretary:</b> Batman<br><br>
+						<button type="button" class="btn" onclick="setLoanRate()">Add Elder</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
+
+						<button type="button" class="btn" onclick="setLoanRate()">Delete Elder</button>
+						<input id="loanRateInput" type="text" name="name"><br><br>
 					</li>
 					
 					<li class="sky-tab-content-4">
-						Bank Reserves tied to Ethereum Account Balance<br>
+					    <b>Savings Account:</b> The Flash (Dropdown needs to be implemented)<br><br>
+						<b>Savings Balance ($):</b> <span id="savBal">100</span><br><br>
+						<button type="button" class="btn" onclick="depositToSavings()">Deposit</button>
+						<input id="savingsForm" type="text" name="name"><br><br>
+						<button type="button" class="btn" onclick="submitWDRW()">Withdraw</button>
+						<input id="savingsForm" type="text" name="name"><br><br>
+					</li>
+					
+					<li class="sky-tab-content-5">
+					    <b>Loan Account:</b> The Flash (Dropdown needs to be implemented)<br><br>
+						<b>Loan Balance ($):</b> <span id="loanBal">300</span><br><br>
+						<b>Loan Starting Date:</b> <span id="loanBal">1/1/2015</span><br><br>
+						<b>Weekly Loan Payment ($):</b> <span id="loanBal">10</span><br><br>
+						<b>Accrued Loan Penalty ($):</b> <span id="loanBal">0</span><br><br>
+
+						<button type="button" class="btn" onclick="applyForLoan()">Apply For Loan</button>
+						<input id="loanForm" type="text" name="name"><br><br>
+						<button type="button" class="btn" onclick="payLoanOff()">Pay Loan</button>
+						<input id="loanForm" type="text" name="name"><br><br>
+					</li>
+					
+					<li class="sky-tab-content-6">
+						<b>Social Fund Balance ($):</b> <span id="loanBal">1000</span><br><br>
+						<b>List of Fund Deposits ($):</b> <span id="loanBal">To Be Implemented (date, member, amount)</span><br><br>
+						<b>List of Fund Withdrawals ($):</b> <span id="loanBal">To Be Implemented  (date, member, amount, purpose)</span><br><br>
+					</li>
+					
+					<li class="sky-tab-content-7">
+						Bank Reserves tied to Ethereum Account Balance / bitUSD<br>
 						Reserve calculations & how they affect Savings & Loan Accounts<br>
-						Max loan time<br>
-						Loan penalties<br>
-						MultiSig social fund<br>
+						Loan penalties & default rules (accrued loan penalty = savings account size)<br>
+						MultiSig social fund (elders approve)<br>
 						Multiple Savings & Loan Accounts<br>
 						Bank structure: members & elders<br>
 						Bank voting rules: members & elders election<br>
 						ID management system<br>
 						Reputation system<br>
+						Statistics over time (weekly savings & loan amounts, etc.)<br>
 						Multiple Banking Groups<br>
+						Many corner cases<br>
 					</li>
 				</ul>
 			</div>

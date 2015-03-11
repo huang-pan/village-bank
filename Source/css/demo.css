@@ -4,7 +4,7 @@ html, body, aside {
 	padding: 0;
 }
 body {
-	overflow: hidden;
+	overflow: scroll;
 	padding: 40px;
 	background-attachment: fixed;
 	background-position: 50% 0;
